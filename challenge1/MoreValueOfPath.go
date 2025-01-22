@@ -3,46 +3,19 @@ package challenge_1
 // challenge 1
 func MoreValueOfPath(data [][]int) int {
 
-	var answerList = make([]int, len(data))
+	answer := make([]int, len(data))
+	copy(answer, data[len(data)-1])
 
-	answerList[0] = data[0][0]
-
-	for i := 1; i < len(data); i++ {
-
-		_answerList := make([]int, len(answerList))
-		copy(_answerList, answerList)
-
+	for i := len(data) - 2; i >= 0; i-- {
 		for j := 0; j < len(data[i]); j++ {
-
-			var sumMaxAnswerTestcase int
-
-			if j == 0 {
-				sumMaxAnswerTestcase = _answerList[0]
-			} else if j == i {
-				sumMaxAnswerTestcase = _answerList[i]
-			} else if _answerList[j-1] > _answerList[j] {
-				sumMaxAnswerTestcase = _answerList[j-1]
+			if answer[j] > answer[j+1] {
+				answer[j] = data[i][j] + answer[j]
 			} else {
-				sumMaxAnswerTestcase = _answerList[j]
+				answer[j] = data[i][j] + answer[j+1]
 			}
-
-			answerList[j] = sumMaxAnswerTestcase + data[i][j]
 		}
 
 	}
 
-	return findLargestNumber(answerList)
-}
-
-func findLargestNumber(nums []int) int {
-	if len(nums) == 0 {
-		return 0
-	}
-	largest := nums[0]
-	for i := 1; i < len(nums); i++ {
-		if nums[i] > largest {
-			largest = nums[i]
-		}
-	}
-	return largest
+	return answer[0]
 }
