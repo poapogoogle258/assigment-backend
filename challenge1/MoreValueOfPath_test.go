@@ -39,6 +39,24 @@ func TestMoreValueOfPath(t *testing.T) {
 			data:   loadTestCaseFromFileJson("files/testcase_hard.json"),
 			expect: 7273,
 		},
+		{
+			name:   "testcase 3 : empty testcase",
+			data:   loadTestCaseFromFileJson("files/testcase_empty.json"),
+			expect: 0,
+		}, {
+			name:   "testcase 4 : height 1 testcase",
+			data:   loadTestCaseFromFileJson("files/testcase_empty_height_1.json"),
+			expect: 15,
+		}, {
+			name:   "testcase 5 : height 2 testcase",
+			data:   loadTestCaseFromFileJson("files/testcase_empty_height_2.json"),
+			expect: 17,
+		},
+		{
+			name:   "testcase 6 : height 3 testcase",
+			data:   loadTestCaseFromFileJson("files/testcase_empty_height_3.json"),
+			expect: 22,
+		},
 	}
 
 	for _, c := range testcase {
