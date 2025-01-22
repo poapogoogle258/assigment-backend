@@ -76,3 +76,47 @@ func TestArrayToString(t *testing.T) {
 		})
 	}
 }
+
+func TestValidate(t *testing.T) {
+
+	testcase := []struct {
+		name   string
+		data   []int
+		input  string
+		expect bool
+	}{
+		{
+			name:   "testcase 1",
+			data:   []int{0, 0, 0, 2, 1, 0},
+			input:  "==RLL",
+			expect: true,
+		},
+		{
+			name:   "testcase 2",
+			data:   []int{2, 2, 1, 0, 1, 2},
+			input:  "=LLRR",
+			expect: true,
+		}, {
+			name:   "testcase 3",
+			data:   []int{0, 1, 2, 0, 0, 0},
+			input:  "==RLL",
+			expect: false,
+		}, {
+			name:   "testcase 4",
+			data:   []int{1, 2, 0, 0, 2, 1},
+			input:  "=LLRR",
+			expect: false,
+		},
+	}
+
+	for _, tt := range testcase {
+		t.Run(tt.name, func(t *testing.T) {
+			answer := Validate(tt.data, tt.input)
+
+			assert.Equal(t, tt.expect, answer)
+		})
+	}
+
+	assert.Panics(t, func() { Validate([]int{2, 2, 1, 0, 1, 2}, "+LLRR") })
+
+}
